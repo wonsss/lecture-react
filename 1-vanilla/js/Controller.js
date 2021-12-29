@@ -16,10 +16,15 @@ export default class Controller {
 
   subscribeViewEvents() {
     this.searchFormView
-      .on("@submit", (event) => this.search(event.detail.value))
+      .on("@submit", event => this.search(event.detail.value))
       .on("@reset", () => this.reset());
 
-    // TODO
+    this.tabView.on("@change", event => this.changeTab(event.detail.value));
+  }
+
+  changeTab(tab) {
+    this.store.selectedTab = tab;
+    this.render();
   }
 
   search(keyword) {
