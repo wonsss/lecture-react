@@ -17,12 +17,13 @@ export default class Store {
 
   search(keyword) {
     this.searchKeyword = keyword;
-    this.searchResult = this.storage.productData.filter((product) =>
+    this.searchResult = this.storage.productData.filter(product =>
       product.name.includes(keyword)
     );
   }
 
   getKeywordList() {
     // TODO
+    return this.storage.keywordData;
   }
 }
