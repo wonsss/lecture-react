@@ -4,18 +4,18 @@ import View from "./View.js";
 const tag = "[KeywrodListView]";
 
 export default class KeywordListView extends View {
-  // TODO
-  constructor() {
+  // 엘리먼트와 템플릿을 외부에서 주입받도록 변경(기본값은 설정)
+  constructor(element = qs("#keyword-list-view"), template = new Template()) {
     console.log(tag, "constructor");
 
-    super(qs("#keyword-list-view"));
+    super(element);
 
-    this.template = new Template();
+    this.template = template;
     this.bindEvents();
   }
 
   bindEvents() {
-    delegate(this.element, "click", "li", (event) => this.handleClick(event));
+    delegate(this.element, "click", "li", event => this.handleClick(event));
   }
 
   handleClick(event) {
