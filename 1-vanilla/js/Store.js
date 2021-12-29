@@ -22,21 +22,28 @@ export default class Store {
       product.name.includes(keyword)
     );
     // TODO
-    this.addHistoryData(keyword);
+    this.addHistory(keyword);
   }
 
-  addHistoryData(keyword) {
-    for (let i = 0; i < this.storage.historyData.length; i++) {
-      if (this.storage.historyData[i].keyword === keyword) {
-        this.storage.historyData.splice(i, 1);
-        break;
-      }
+  addHistory(keyword) {
+    keyword = keyword.trim();
+    if (!keyword) {
+      return;
+    }
+    // 스토리지에 해당 키워드 이미 있으면 삭제
+    const hasHistory = this.storage.historyData.some(
+      history => history.keyword === keyword
+    );
+
+    if (hasHistory) {
+      this.removeHistory(keyword);
     }
 
     const id = createNextId(this.storage.historyData);
-    const date = createPastDate();
+    const date = new Date();
     const newData = { id, keyword, date };
     this.storage.historyData.push(newData);
+    this.storage.historyData = this.getHistoryList();
   }
 
   getKeywordList() {
