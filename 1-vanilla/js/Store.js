@@ -1,3 +1,4 @@
+import { createNextId, createPastDate } from "./helpers.js";
 import { TabType } from "./views/TabView.js";
 
 const tag = "[Store]";
@@ -17,10 +18,25 @@ export default class Store {
 
   search(keyword) {
     this.searchKeyword = keyword;
-    this.searchResult = this.storage.productData.filter((product) =>
+    this.searchResult = this.storage.productData.filter(product =>
       product.name.includes(keyword)
     );
     // TODO
+    this.addHistoryData(keyword);
+  }
+
+  addHistoryData(keyword) {
+    for (let i = 0; i < this.storage.historyData.length; i++) {
+      if (this.storage.historyData[i].keyword === keyword) {
+        this.storage.historyData.splice(i, 1);
+        break;
+      }
+    }
+
+    const id = createNextId(this.storage.historyData);
+    const date = createPastDate();
+    const newData = { id, keyword, date };
+    this.storage.historyData.push(newData);
   }
 
   getKeywordList() {
@@ -37,7 +53,7 @@ export default class Store {
 
   removeHistory(keyword) {
     this.storage.historyData = this.storage.historyData.filter(
-      (history) => history.keyword !== keyword
+      history => history.keyword !== keyword
     );
   }
 
