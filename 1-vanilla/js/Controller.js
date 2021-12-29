@@ -14,7 +14,7 @@ export default class Controller {
 
   subscribeViewEvents() {
     this.searchFormView
-      .on("@submit", (event) => this.search(event.detail.value))
+      .on("@submit", event => this.search(event.detail.value))
       .on("@reset", () => this.reset());
   }
 
@@ -27,7 +27,9 @@ export default class Controller {
 
   reset() {
     console.log(tag, "reset");
-    // TODO
+    this.store.searchKeyword = "";
+    this.store.searchResult = [];
+    this.render();
   }
 
   render() {
