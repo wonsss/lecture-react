@@ -26,7 +26,7 @@ export default class View {
 
   on(eventName, handler) {
     on(this.element, eventName, handler);
-    return this;
+    return this; //this를 return하고 있어서 on메서드는 메서드 체이닝을 할 수 있다.
   }
 
   emit(eventName, data) {
