@@ -15,7 +15,7 @@ export function on(target, eventName, handler) {
 }
 
 export function delegate(target, eventName, selector, handler) {
-  const emitEvent = (event) => {
+  const emitEvent = event => {
     const potentialElements = qsAll(selector, target);
 
     for (const potentialElement of potentialElements) {
@@ -28,10 +28,12 @@ export function delegate(target, eventName, selector, handler) {
   on(target, eventName, emitEvent);
 }
 
+// CustomEvent 생성,  CustomEvent의 두 번째 인수엔 객체가 들어갈 수 있는데, 개발자는 이 객체에 detail이라는 프로퍼티를 추가해 커스텀 이벤트 관련 정보를 명시하고, 정보를 이벤트에 전달할 수 있습니다.
 export function emit(target, eventName, detail) {
   const event = new CustomEvent(eventName, { detail });
   target.dispatchEvent(event);
 }
+// 이벤트 객체를 생성한 다음엔 elem.dispatchEvent(event)를 호출해 요소에 있는 이벤트를 반드시 '실행’시켜줘야 합니다(dispatch는 일을 '처리하다’라는 뜻을 가진 영어단어입니다 – 옮긴이). 이렇게 이벤트를 실행시켜줘야 핸들러가 일반 브라우저 이벤트처럼 이벤트에 반응할 수 있습니다. bubbles 플래그를 true로 해서 이벤트를 만든 경우 이벤트는 제대로 버블링 됩니다.
 
 export function formatRelativeDate(date = new Date()) {
   const TEN_SECOND = 10 * 1000;
@@ -61,5 +63,5 @@ export function createPastDate(date = 1, now = new Date()) {
 }
 
 export function createNextId(list = []) {
-  return Math.max(...list.map((item) => item.id)) + 1;
+  return Math.max(...list.map(item => item.id)) + 1;
 }
