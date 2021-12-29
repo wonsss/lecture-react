@@ -1,7 +1,7 @@
 import { delegate, qs } from "../helpers.js";
 import View from "./View.js";
 
-const tag = "[KeywrodListView]";
+const tag = "[KeywordListView]";
 
 export default class KeywordListView extends View {
   constructor(element = qs("#keyword-list-view"), template = new Template()) {
@@ -14,7 +14,7 @@ export default class KeywordListView extends View {
   }
 
   bindEvents() {
-    delegate(this.element, "click", "li", (event) => this.handleClick(event));
+    delegate(this.element, "click", "li", event => this.handleClick(event));
   }
 
   handleClick(event) {
