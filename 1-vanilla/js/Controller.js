@@ -22,14 +22,12 @@ export default class Controller {
 
   subscribeViewEvents() {
     this.searchFormView
-      .on("@submit", (event) => this.search(event.detail.value))
+      .on("@submit", event => this.search(event.detail.value))
       .on("@reset", () => this.reset());
 
-    this.tabView.on("@change", (event) => this.changeTab(event.detail.value));
+    this.tabView.on("@change", event => this.changeTab(event.detail.value));
 
-    this.keywordListView.on("@click", (event) =>
-      this.search(event.detail.value)
-    );
+    this.keywordListView.on("@click", event => this.search(event.detail.value));
   }
 
   search(keyword) {
@@ -73,6 +71,8 @@ export default class Controller {
 
   renderSearchResult() {
     // TODO
+    this.searchFormView.show(this.store.searchKeyword);
+
     this.tabView.hide();
     this.keywordListView.hide();
 
