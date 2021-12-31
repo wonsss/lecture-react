@@ -13,14 +13,9 @@ class App extends React.Component {
       searchKeyword,
     });
   }
+  // 조건부 렌더링 방법 2 - 삼항 연산자를 사용하는 방식
 
   render() {
-    // 조건부 렌더링 방법 1 - 엘리먼트 변수를 사용하는 방식
-    let resetButton = null;
-
-    if (this.state.searchKeyword.length > 0) {
-      resetButton = <button type='reset' className='btn-reset'></button>;
-    }
     return (
       <>
         <header>
@@ -35,7 +30,9 @@ class App extends React.Component {
               value={this.state.searchKeyword}
               onChange={event => this.handleChangeInput(event)}
             />
-            {resetButton}
+            {this.state.searchKeyword.length > 0 ? (
+              <button type='reset' className='btn-reset'></button>
+            ) : null}
           </form>
         </div>
       </>
