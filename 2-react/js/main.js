@@ -1,3 +1,4 @@
+// 엔터를 입력하면 검색 결과가 보인다
 class App extends React.Component {
   constructor() {
     super();
@@ -7,13 +8,17 @@ class App extends React.Component {
     };
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log("TODO: handleSubmit", this.state.searchKeyword);
+  }
+
   handleChangeInput(event) {
     const searchKeyword = event.target.value;
     this.setState({
       searchKeyword,
     });
   }
-  // 조건부 렌더링 방법 3 - && 연산자를 사용하는 방식
 
   render() {
     return (
@@ -22,7 +27,7 @@ class App extends React.Component {
           <h2 className='container'>검색</h2>
         </header>
         <div className='container'>
-          <form>
+          <form onSubmit={event => this.handleSubmit(event)}>
             <input
               type='text'
               placeholder='검색어를 입력하세요'
