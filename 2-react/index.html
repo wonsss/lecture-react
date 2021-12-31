@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lecture React</title>
-    <!-- TODO -->
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <div id="app"></div>
@@ -21,10 +21,12 @@
 
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <!-- TODO -->
-    <script type="text/babel">
-      const element = <h1>Hello world</h1>;
-      ReactDOM.render(element, document.querySelector("#app"));
-    </script>
+    <!--data-type="module"은 main.js안에서 다른 js파일을 import해올 수 있게 모듈로 지정한다. data-presets="react"은 바벨이 이 정보를 보고 react로 컴파일한다. -->
+    <script
+      type="text/babel"
+      src="js/main.js"
+      data-type="module"
+      data-presets="react"
+    ></script>
   </body>
 </html>
