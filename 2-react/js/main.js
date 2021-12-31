@@ -1,4 +1,8 @@
-// TODO
-const element = <h1>Hello world</h1>;
+// JSX 코드
+const element = (
+  <header>
+    <h2 className='container'>검색</h2>
+  </header>
+);
 
 ReactDOM.render(element, document.querySelector("#app"));
