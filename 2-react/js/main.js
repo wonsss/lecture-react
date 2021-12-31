@@ -7,20 +7,20 @@ class App extends React.Component {
     };
   }
 
-  // 리액트에서 이벤트를 처리하는 핸들러 이름은 보통 앞에 handle로 시작하는 관례가 있다.
   handleChangeInput(event) {
-    // 리액트 컴포넌트는 필요할 때만 render() 함수를 불러서 갱신한다.
-    // 강제로 컴포넌트의 렌더함수를 돌게 하려면, forceUpdate를 호출해야 한다.
-    // this.state.searchKeyword = event.target.value; // 직접 수정 방법(권장되지 않음)
-    // this.forceUpdate();
-
-    // 리액트 컴포넌트 스스로 state의 변화를 감지하고 render함수 호출할 수 있게 하려면, setState를 사용해야 한다.
+    const searchKeyword = event.target.value;
     this.setState({
-      searchKeyword: event.target.value,
+      searchKeyword,
     });
   }
 
   render() {
+    // 조건부 렌더링 방법 1 - 엘리먼트 변수를 사용하는 방식
+    let resetButton = null;
+
+    if (this.state.searchKeyword.length > 0) {
+      resetButton = <button type='reset' className='btn-reset'></button>;
+    }
     return (
       <>
         <header>
@@ -35,7 +35,7 @@ class App extends React.Component {
               value={this.state.searchKeyword}
               onChange={event => this.handleChangeInput(event)}
             />
-            <button type='reset' className='btn-reset'></button>
+            {resetButton}
           </form>
         </div>
       </>
