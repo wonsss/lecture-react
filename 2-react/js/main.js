@@ -1,16 +1,23 @@
+import store from "./js/Store.js";
+
 class App extends React.Component {
   constructor() {
     super();
 
     this.state = {
       searchKeyword: "",
-      // TODO
+      searchResult: [],
     };
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log("TODO: handleSubmit", this.state.searchKeyword);
+    this.search(this.state.searchKeyword);
+  }
+
+  search(searchKeyword) {
+    const searchResult = store.search(searchKeyword);
+    this.setState({ searchResult });
   }
 
   handleReset() {
@@ -27,25 +34,40 @@ class App extends React.Component {
     return (
       <>
         <header>
-          <h2 className="container">검색</h2>
+          <h2 className='container'>검색</h2>
         </header>
-        <div className="container">
+        <div className='container'>
           <form
-            onSubmit={(event) => this.handleSubmit(event)}
+            onSubmit={event => this.handleSubmit(event)}
             onReset={() => this.handleReset()}
           >
             <input
-              type="text"
-              placeholder="검색어를 입력하세요"
+              type='text'
+              placeholder='검색어를 입력하세요'
               autoFocus
               value={this.state.searchKeyword}
-              onChange={(event) => this.handleChangeInput(event)}
+              onChange={event => this.handleChangeInput(event)}
             />
             {this.state.searchKeyword.length > 0 && (
-              <button type="reset" className="btn-reset"></button>
+              <button type='reset' className='btn-reset'></button>
             )}
           </form>
-          <div className="content">{/* TODO */}</div>
+          <div className='content'>
+            {this.state.searchResult.length > 0 ? (
+              <ul className='result'>
+                {this.state.searchResult.map(item => {
+                  return (
+                    <li>
+                      <img src={item.imageUrl} alt={item.name} />
+                      <p>{item.name}</p>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <div className='empty-box'>검색 결과가 없습니다</div>
+            )}
+          </div>
         </div>
       </>
     );
