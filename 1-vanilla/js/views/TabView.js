@@ -24,7 +24,7 @@ export default class TabView extends View {
   }
 
   bindEvents() {
-    delegate(this.element, "click", "li", (event) => this.handleClick(event));
+    delegate(this.element, "click", "li", event => this.handleClick(event));
   }
 
   handleClick(event) {
@@ -36,7 +36,7 @@ export default class TabView extends View {
 
   show(selectedTab) {
     this.element.innerHTML = this.template.getTabList();
-    qsAll("li", this.element).forEach((li) => {
+    qsAll("li", this.element).forEach(li => {
       li.className = li.dataset.tab == selectedTab ? "active" : "";
     });
 
@@ -49,7 +49,7 @@ class Template {
     return `
       <ul class="tabs">
         ${Object.values(TabType)
-          .map((tabType) => ({ tabType, tabLabel: TabLabel[tabType] }))
+          .map(tabType => ({ tabType, tabLabel: TabLabel[tabType] }))
           .map(this._getTab)
           .join("")}
       </ul>

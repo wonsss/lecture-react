@@ -15,7 +15,7 @@ class Store {
   search(keyword) {
     this.addHistory(keyword);
 
-    return this.storage.productData.filter((product) =>
+    return this.storage.productData.filter(product =>
       product.name.includes(keyword)
     );
   }
@@ -25,7 +25,7 @@ class Store {
     if (!keyword) return;
 
     const hasHistory = this.storage.historyData.some(
-      (history) => history.keyword === keyword
+      history => history.keyword === keyword
     );
     if (hasHistory) {
       this.removeHistory(keyword);
@@ -51,7 +51,7 @@ class Store {
 
   removeHistory(keyword) {
     this.storage.historyData = this.storage.historyData.filter(
-      (history) => history.keyword !== keyword
+      history => history.keyword !== keyword
     );
   }
 }

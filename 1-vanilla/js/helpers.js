@@ -15,7 +15,7 @@ export function on(target, eventName, handler) {
 }
 
 export function delegate(target, eventName, selector, handler) {
-  const emitEvent = (event) => {
+  const emitEvent = event => {
     const potentialElements = qsAll(selector, target);
 
     for (const potentialElement of potentialElements) {
@@ -61,5 +61,5 @@ export function createPastDate(date = 1, now = new Date()) {
 }
 
 export function createNextId(list = []) {
-  return Math.max(...list.map((item) => item.id)) + 1;
+  return Math.max(...list.map(item => item.id)) + 1;
 }

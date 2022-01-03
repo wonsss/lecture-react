@@ -29,18 +29,16 @@ export default class Controller {
 
   subscribeViewEvents() {
     this.searchFormView
-      .on("@submit", (event) => this.search(event.detail.value))
+      .on("@submit", event => this.search(event.detail.value))
       .on("@reset", () => this.reset());
 
-    this.tabView.on("@change", (event) => this.changeTab(event.detail.value));
+    this.tabView.on("@change", event => this.changeTab(event.detail.value));
 
-    this.keywordListView.on("@click", (event) =>
-      this.search(event.detail.value)
-    );
+    this.keywordListView.on("@click", event => this.search(event.detail.value));
 
     this.historyListView
-      .on("@click", (event) => this.search(event.detail.value))
-      .on("@remove", (event) => this.removeHistory(event.detail.value));
+      .on("@click", event => this.search(event.detail.value))
+      .on("@remove", event => this.removeHistory(event.detail.value));
   }
 
   search(keyword) {

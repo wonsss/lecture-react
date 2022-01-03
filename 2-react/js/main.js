@@ -81,25 +81,25 @@ class App extends React.Component {
   render() {
     const searchForm = (
       <form
-        onSubmit={(event) => this.handleSubmit(event)}
+        onSubmit={event => this.handleSubmit(event)}
         onReset={() => this.handleReset()}
       >
         <input
-          type="text"
-          placeholder="검색어를 입력하세요"
+          type='text'
+          placeholder='검색어를 입력하세요'
           autoFocus
           value={this.state.searchKeyword}
-          onChange={(event) => this.handleChangeInput(event)}
+          onChange={event => this.handleChangeInput(event)}
         />
         {this.state.searchKeyword.length > 0 && (
-          <button type="reset" className="btn-reset"></button>
+          <button type='reset' className='btn-reset'></button>
         )}
       </form>
     );
 
     const searchResult =
       this.state.searchResult.length > 0 ? (
-        <ul className="result">
+        <ul className='result'>
           {this.state.searchResult.map(({ id, imageUrl, name }) => (
             <li key={id}>
               <img src={imageUrl} />
@@ -108,14 +108,14 @@ class App extends React.Component {
           ))}
         </ul>
       ) : (
-        <div className="empty-box">검색 결과가 없습니다</div>
+        <div className='empty-box'>검색 결과가 없습니다</div>
       );
 
     const keywordList = (
-      <ul className="list">
+      <ul className='list'>
         {this.state.keywordList.map(({ id, keyword }, index) => (
           <li key={id} onClick={() => this.search(keyword)}>
-            <span className="number">{index + 1}</span>
+            <span className='number'>{index + 1}</span>
             <span>{keyword}</span>
           </li>
         ))}
@@ -123,14 +123,14 @@ class App extends React.Component {
     );
 
     const historyList = (
-      <ul className="list">
+      <ul className='list'>
         {this.state.historyList.map(({ id, keyword, date }) => (
           <li key={id} onClick={() => this.search(keyword)}>
             <span>{keyword}</span>
-            <span className="date">{formatRelativeDate(date)}</span>
+            <span className='date'>{formatRelativeDate(date)}</span>
             <button
-              className="btn-remove"
-              onClick={(event) => this.handleClickRemoveHistory(event, keyword)}
+              className='btn-remove'
+              onClick={event => this.handleClickRemoveHistory(event, keyword)}
             />
           </li>
         ))}
@@ -139,8 +139,8 @@ class App extends React.Component {
 
     const tabs = (
       <>
-        <ul className="tabs">
-          {Object.values(TabType).map((tabType) => (
+        <ul className='tabs'>
+          {Object.values(TabType).map(tabType => (
             <li
               key={tabType}
               className={this.state.selectedTab === tabType ? "active" : ""}
@@ -158,11 +158,11 @@ class App extends React.Component {
     return (
       <>
         <header>
-          <h2 className="container">검색</h2>
+          <h2 className='container'>검색</h2>
         </header>
-        <div className="container">
+        <div className='container'>
           {searchForm}
-          <div className="content">
+          <div className='content'>
             {this.state.submitted ? searchResult : tabs}
           </div>
         </div>
