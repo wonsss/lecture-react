@@ -1,5 +1,15 @@
 import store from "./js/Store.js";
 
+const TabType = {
+  KEYWORD: "KEYWORD",
+  HISTORY: "HISTORY",
+};
+
+const TabLabel = {
+  [TabType.KEYWORD]: "추천 검색어",
+  [TabType.HISTORY]: "최근 검색어",
+};
+
 class App extends React.Component {
   constructor() {
     super();
@@ -45,25 +55,25 @@ class App extends React.Component {
   render() {
     const searchForm = (
       <form
-        onSubmit={(event) => this.handleSubmit(event)}
+        onSubmit={event => this.handleSubmit(event)}
         onReset={() => this.handleReset()}
       >
         <input
-          type="text"
-          placeholder="검색어를 입력하세요"
+          type='text'
+          placeholder='검색어를 입력하세요'
           autoFocus
           value={this.state.searchKeyword}
-          onChange={(event) => this.handleChangeInput(event)}
+          onChange={event => this.handleChangeInput(event)}
         />
         {this.state.searchKeyword.length > 0 && (
-          <button type="reset" className="btn-reset"></button>
+          <button type='reset' className='btn-reset'></button>
         )}
       </form>
     );
 
     const searchResult =
       this.state.searchResult.length > 0 ? (
-        <ul className="result">
+        <ul className='result'>
           {this.state.searchResult.map(({ id, imageUrl, name }) => (
             <li key={id}>
               <img src={imageUrl} />
@@ -72,22 +82,28 @@ class App extends React.Component {
           ))}
         </ul>
       ) : (
-        <div className="empty-box">검색 결과가 없습니다</div>
+        <div className='empty-box'>검색 결과가 없습니다</div>
       );
 
     // TODO
-    const tabs = null;
+    const tabs = (
+      <ul className='tabs'>
+        {Object.values(TabType).map(tabType => {
+          return <li key={tabType}>{TabLabel[tabType]}</li>;
+        })}
+      </ul>
+    );
 
     return (
       <>
         <header>
-          <h2 className="container">검색</h2>
+          <h2 className='container'>검색</h2>
         </header>
-        <div className="container">
+        <div className='container'>
           {searchForm}
-          <div className="content">
+          <div className='content'>
             {/* TODO */}
-            {this.state.submitted && searchResult}
+            {this.state.submitted ? searchResult : tabs}
           </div>
         </div>
       </>
