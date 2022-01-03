@@ -63,6 +63,14 @@ class App extends React.Component {
     this.setState({ searchKeyword });
   }
 
+  handleClickRemoveHistory(event, keyword) {
+    // 이벤트 버블링 발생하므로, 이벤트 전파를 차단해야 한다.
+    event.stopPropagation();
+    store.removeHistory(keyword);
+    const historyList = store.getHistoryList();
+    this.setState({ historyList });
+  }
+
   render() {
     const searchForm = (
       <form
@@ -116,7 +124,10 @@ class App extends React.Component {
             <li key={id} onClick={() => this.search(keyword)}>
               <span>{keyword}</span>
               <span className='date'>{formatRelativeDate(date)}</span>
-              <button className='btn-remove'></button>
+              <button
+                className='btn-remove'
+                onClick={event => this.handleClickRemoveHistory(event, keyword)}
+              ></button>
             </li>
           );
         })}
