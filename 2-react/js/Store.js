@@ -12,7 +12,7 @@ class Store {
   }
 
   search(keyword) {
-    return this.storage.productData.filter((product) =>
+    return this.storage.productData.filter(product =>
       product.name.includes(keyword)
     );
   }

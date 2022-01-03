@@ -7,7 +7,7 @@ export default class HistoryListView extends KeywordListView {
   }
 
   bindEvents() {
-    delegate(this.element, "click", "button.btn-remove", (event) =>
+    delegate(this.element, "click", "button.btn-remove", event =>
       this.handleClickRemoveButton(event)
     );
 
