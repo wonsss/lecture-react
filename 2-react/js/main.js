@@ -18,6 +18,7 @@ class App extends React.Component {
       searchKeyword: "",
       searchResult: [],
       submitted: false,
+      selectedTab: TabType.KEYWORD,
     };
   }
 
@@ -85,13 +86,24 @@ class App extends React.Component {
         <div className='empty-box'>검색 결과가 없습니다</div>
       );
 
-    // TODO
     const tabs = (
-      <ul className='tabs'>
-        {Object.values(TabType).map(tabType => {
-          return <li key={tabType}>{TabLabel[tabType]}</li>;
-        })}
-      </ul>
+      <>
+        <ul className='tabs'>
+          {Object.values(TabType).map(tabType => {
+            return (
+              <li
+                className={this.state.selectedTab === tabType ? "active" : ""}
+                key={tabType}
+                onClick={() => this.setState({ selectedTab: tabType })}
+              >
+                {TabLabel[tabType]}
+              </li>
+            );
+          })}
+        </ul>
+        {this.state.selectedTab === TabType.KEYWORD && <>TODO: 추천 검색어</>}
+        {this.state.selectedTab === TabType.HISTORY && <>TODO: 최근 검색어</>}
+      </>
     );
 
     return (
