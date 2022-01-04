@@ -2,10 +2,10 @@
 import React from "react";
 
 // 리액트 엘리먼트를 반환하는 Header라는 함수
-const Header = () => {
+const Header = props => {
   return (
     <header>
-      <h2 className='container'>검색</h2>
+      <h2 className='container'>{props.title}</h2>
     </header>
   );
 };
