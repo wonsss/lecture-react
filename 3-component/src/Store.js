@@ -32,7 +32,7 @@ class Store {
 
     const id = createNextId(this.storage.historyData);
     const date = new Date();
-    this.storage.historyData.push({ id, keyword, date });
+    this.storage.historyData.unshift({ id, keyword, date });
     this.storage.historyData = this.storage.historyData.sort(this._sortHistory);
   }
 
