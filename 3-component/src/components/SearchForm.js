@@ -9,6 +9,11 @@ export default class SearchForm extends React.Component {
     };
   }
 
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.onSubmit(this.state.searchKeyword);
+  }
+
   handleChangeInput(event) {
     const searchKeyword = event.target.value;
     this.setState({ searchKeyword });
@@ -16,7 +21,7 @@ export default class SearchForm extends React.Component {
 
   render() {
     return (
-      <form>
+      <form onSubmit={event => this.handleSubmit(event)}>
         <input
           type='text'
           placeholder='검색어를 입력하세요'
