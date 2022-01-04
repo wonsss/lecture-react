@@ -7,12 +7,19 @@ export default class App extends React.Component {
     console.log("TODO: search", searchKeyword);
   }
 
+  handleReset() {
+    console.log("TODO: handleReset");
+  }
+
   render() {
     return (
       <>
         <Header title='검색' />
         <div className='container'>
-          <SearchForm onSubmit={searchKeyword => this.search(searchKeyword)} />
+          <SearchForm
+            onSubmit={searchKeyword => this.search(searchKeyword)}
+            onReset={() => this.handleReset()}
+          />
         </div>
       </>
     );
